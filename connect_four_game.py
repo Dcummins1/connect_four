@@ -17,9 +17,7 @@ class play_game():
         if self.board[0][move] == 0:
             while i < 6:
                 if self.board[i][move] == 0:
-                    #print('falling piece')
                     i += 1
-                    #print (i)
                 else:
                     break
             self.board[i - 1][move] = player

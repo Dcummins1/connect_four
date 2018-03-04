@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>New Game</title>
-</head>
-<body>
-<p>Lets get playing!!!</p>
+<html>
+{% load staticfiles %}
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.9/p5.min.js"></script>
+    <!--<script src="../static/connect_four/js/connect4.js"></script>-->
+        <script src="{% static 'connect_four/js/connect4.js' %}"></script>
 
-</body>
+
+  </head>
+  <body>
+      <p>Lets play!</p>
+      <canvas id="canvas"></canvas>
+  </body>
 </html>
