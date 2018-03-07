@@ -1,0 +1,23 @@
+{% extends 'games.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+<p>Games you are involved in:</p>
+    {% for game1 in involved_list %}
+    <li><a href="{% url 'joingame' %}?game_id={{game1.game_id}}">{{ game1.user_1.username}} vs {{ game1.user_2.username}}, Game: {{ game1.game_id}} </a></li>
+
+{% endfor %}
+
+<p>Games you can join:</p>
+{% for game in join_list %}
+    <li><a href="{% url 'joingame' %}?game_id={{game.game_id}}">Game vs {{ game.user_1.username}}, Game: {{ game.game_id}} </a></li>
+
+{% endfor %}
+<p><a href="{% url 'create' %}">Start New Game</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+
+<p><a href="{% url 'logout' %}">logout</a></p>
+{% endblock %}

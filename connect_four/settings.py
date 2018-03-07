@@ -25,7 +25,7 @@ SECRET_KEY = 'c@-6j-ub+bgq88bwcm9!qdec)sdb3rw=d6i+3)k^#tl#$a&-kd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'playgame'
+    #'channels'
 ]
 
 MIDDLEWARE = [
@@ -46,6 +47,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    #'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -137,6 +139,13 @@ STATICFILES_DIRS = [
 
 
 STATIC_URL = '/static/'
-LOGIN_REDIRECT_URL = 'games'
-LOGOUT_REDIRECT_URL = 'games'
+LOGIN_REDIRECT_URL = 'join'
+LOGOUT_REDIRECT_URL = 'join'
 GAMES_REDIRECT_URL = 'play'
+
+# CHANNEL_LAYERS = {
+#  "default": {
+#  "BACKEND": "asgiref.inmemory.ChannelLayer",
+#  "ROUTING": "connect_four.routing.channel_routing",
+#  },
+# }

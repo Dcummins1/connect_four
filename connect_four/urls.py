@@ -23,10 +23,12 @@ from django.conf.urls.static import static
 admin.autodiscover()
 
 urlpatterns = [
-path('', TemplateView.as_view(template_name='games.html'), name='games'),
+
     path('admin/', admin.site.urls),
     path('playgame/', include('playgame.urls')),
     path('playgame/', include('django.contrib.auth.urls')),
+
+
 
 
 ] + static(settings.STATIC_URL)

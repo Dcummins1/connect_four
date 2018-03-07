@@ -5,15 +5,16 @@
 {% block content %}
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">logout</a></p>
-  <p>Games you are playing:
-  <ul><li><a href="{% url 'play' %}">Game vs Hildy</a></li><li><a href="{% url 'play' %}">Game vs Random</a></li></ul></p>
 
-  <p>Games you can join:
-  <ul><li><a href="{% url 'play' %}">Game vs Dan</a></li><li><a href="{% url 'play' %}">Game vs Eva</a></li></ul></p>
-    <p><a href="{% url 'play' %}">Start New Game</a></p>
+  <p>Games you are playing:
+  <ul><li><a href="{% url 'join' %}">Game vs Hildy</a></li><li><a href="{% url 'play' %}">Game vs Random</a></li></ul></p>
+
+
+    <p><a href="{% url 'create' %}">Start New Game</a></p>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a>
 {% endif %}
+
+<p><a href="{% url 'logout' %}">logout</a></p>
 {% endblock %}

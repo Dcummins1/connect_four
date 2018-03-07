@@ -2,7 +2,17 @@ var board;
 var cols;
 var rows;
 var w = 60;
-var player = 1;  // initial game two players on one screen
+var player = 1;
+
+
+function playerTurn(){
+    if (player == 1){
+        document.getElementById("playerturn").innerHTML = "<h2 style='color:blue';>Player 1's turn</h2>"
+    }
+    else {
+        document.getElementById("playerturn").innerHTML = "<h2 style='color:blue';>Player 2's turn</h2>"
+    }
+}
 
 
 function twoDArray(cols, rows) {
@@ -53,6 +63,7 @@ function makeMove(move) {
         board[move][i - 1].show();
         checkSurrounds(move, i - 1);
         player = player * -1;
+        playerTurn();
     }
 
 
@@ -111,7 +122,13 @@ function checkSurrounds(x, y) {
 
             total += count_up_right + count_down_left;
             if (total == 4) {
-                alert("Player "+player+" wins!!!!!!!!!!");
+                if (player == 1){
+                    alert("Player "+player+" wins!!!!!!!!!!");
+                    }
+                else {
+                    alert("Player 2 wins!!!!!!!!!!");
+                    }
+                location.reload();
                 return;
             }
         }
@@ -150,7 +167,7 @@ Square.prototype.contains = function (x, y) {
 
 Square.prototype.show = function () {
     stroke(0);
-    noFill();
+    fill('blue');
     rect(this.x, this.y, this.w, this.w);
     if (this.player == 1) {
         fill("red");

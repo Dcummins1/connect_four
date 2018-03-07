@@ -1,0 +1,10 @@
+{% extends 'play.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+
+<p id = "gameid"><b>Game Number:{{ current_game }}</p>
+
+<p id = "player2"><b>Player 2: <br>{{ player2 }}</b></p>
+{% endif %}
+{% endblock %}
