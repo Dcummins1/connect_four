@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from .models import Game
 from django.db.models import Q
+import json
 
 
 class SignUp(generic.CreateView):
@@ -25,51 +26,59 @@ class Play(generic.CreateView):
             row = Game.objects.create(player_1 = request.user.id)
             row.save()
             current_game = Game.objects.latest('game_id')
+            current_game = str(current_game)
             player2 = "Waiting for Second Player to Join"
             context = {'current_game':current_game, 'player2':player2}
+            # json_file = open("./static/connect_four/json_games/"+current_game+".json", 'w')  not efficient at all
+            # json.dump([{"player1":request.user.id}], json_file)
+
             return render(request, 'create.html', context)
         else:
-            context = {'current_game': '0', 'player2': 'Me'}
+            context = {'current_game': 'You already have a game waiting', 'player2': 'Noone yet'}
             return render(request, 'create.html', context)
 
 
 def join(request):
     if request.method == 'GET':
         game_id = request.GET.get('game_id')
-        join_game = Game.objects.get(game_id = game_id)
+        join_game = Game.objects.get(game_id=game_id)
+
         if join_game:
             if join_game.player_2 == None:
                 join_game.player_2 = request.user.id
                 join_game.save()
         context = {'game_id': game_id}
         context['specs'] = join_game
+        # json_file = open("./static/connect_four/json_games/" + game_id + ".json", 'w')
+        # json.dump({"player2": request.user.id}, json_file)
     return render(request, 'joingame.html', context)
 
 
-class Games(generic.CreateView):
-    template_name = 'join.html'
-    form_class = UserCreationForm
+# class Games(generic.CreateView):
+#     template_name = 'join.html'
+#     form_class = UserCreationForm
 
-    def join_game_list(request):
-        avail = Game.objects.filter(~Q(player_1 = request.user.id), player_2 = None) # not equal to
-        involved = Game.objects.filter( ~Q(player_2 = None), Q(player_1=request.user.id)| ~Q(player_1 = None),
-                                       player_2=request.user.id )
-        if not avail:
-            context = {'join_list':''}
-            #return render(request, 'join.html', context)
-        else:
-            context = {'join_list': avail}
-        if not involved:
-            context['involved_list']=""
-                # return render(request, 'join.html', context)
-        else:
-            context['involved_list'] = involved
+def join_game_list(request):
+    avail = Game.objects.filter(~Q(player_1 = request.user.id), player_2 = None) # not equal to
+    # involved = Game.objects.filter( ~Q(player_2 = None), Q(player_1=request.user.id)| ~Q(player_1 = None),
+    #                                player_2=request.user.id )
+    involved = Game.objects.filter(Q(player_1=request.user.id) | Q(player_2=request.user.id))
+    if not avail:
+        context = {'join_list':''}
+        #return render(request, 'join.html', context)
+    else:
+        context = {'join_list': avail}
+    if not involved:
+        context['involved_list']=""
+            # return render(request, 'join.html', context)
+    else:
+        context['involved_list'] = involved
 
-        return render(request, 'join.html', context)
+    return render(request, 'join.html', context)
 
-    def get_queryset(self):
-        """Return the last five published questions."""
-        return Game.objects.order_by('-pub_date')[:5]
+def get_queryset(self):
+    """Return the last five published questions."""
+    return Game.objects.order_by('-pub_date')[:5]
 
 
 

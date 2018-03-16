@@ -18,9 +18,10 @@ urlpatterns = [
 
 
     path('create/', views.Play.create_game, name='create'),
-    path('games/', views.Games.as_view(), name='games'),
+    #path('games/', views.Games.as_view(), name='games'),
 
-    path('join/', views.Games.join_game_list, name='join'),
+    path('join/', views.join_game_list, name='join'),
+    path(r'^joingame/(?P<game_id>[0-9]+)/$', views.Play.as_view(), name='livegame'),
 
 ]
 

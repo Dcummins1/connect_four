@@ -3,16 +3,21 @@ var cols;
 var rows;
 var w = 60;
 var player = 1;
+//var movesdict = {"player1":[],"player2":[]}; thought this might work
+var moveslist = [];
 
 
 function playerTurn(){
     if (player == 1){
         document.getElementById("playerturn").innerHTML = "<h2 style='color:blue';>Player 1's turn</h2>"
+
     }
     else {
         document.getElementById("playerturn").innerHTML = "<h2 style='color:blue';>Player 2's turn</h2>"
+
     }
 }
+
 
 
 function twoDArray(cols, rows) {
@@ -61,8 +66,9 @@ function makeMove(move) {
         board[move][i - 1].player = player;
         board[move][i - 1].empty = false;
         board[move][i - 1].show();
+        moveslist.push([move, i-1]);
         checkSurrounds(move, i - 1);
-        player = player * -1;
+        //player = player * -1;
         playerTurn();
     }
 
@@ -177,6 +183,10 @@ Square.prototype.show = function () {
         ellipse(this.x + this.w * 0.5, this.y + this.w * 0.5, this.w * 0.5);
 
     }
+function reload_board(movesdict){
+    pass;
 
+
+}
 
 }
