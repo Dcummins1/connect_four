@@ -206,6 +206,7 @@ function savegame() {
 //function reload_board(){
 //    //take string from db and process into moves
 //    var moves = moveslist_test.toString();
+//    moveslist = []
 //    for (var n=0; n <= moves.length; n++){
 //        if (moves.charAt(n)>= '0' && moves.charAt(n) <= '9') {
 //            var x = parseInt(moves.charAt(n));
