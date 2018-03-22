@@ -22,6 +22,7 @@ urlpatterns = [
 
     path('join/', views.join_game_list, name='join'),
     path(r'^joingame/(?P<game_id>[0-9]+)/$', views.Play.as_view(), name='livegame'),
+    path('savegame/',views.save_game, name='savegame'),
 
 ]
 

@@ -3,9 +3,8 @@ var cols;
 var rows;
 var w = 60;
 var player = 1;
-//var movesdict = {"player1":[],"player2":[]}; thought this might work
 var moveslist = [];
-
+var game_id;
 
 function playerTurn(){
     if (player == 1){
@@ -66,10 +65,12 @@ function makeMove(move) {
         board[move][i - 1].player = player;
         board[move][i - 1].empty = false;
         board[move][i - 1].show();
-        moveslist.push([move, i-1]);
+        moveslist.push(move);
+        savegame();
         checkSurrounds(move, i - 1);
-        //player = player * -1;
+        player = player*-1;
         playerTurn();
+
     }
 
 
@@ -183,10 +184,36 @@ Square.prototype.show = function () {
         ellipse(this.x + this.w * 0.5, this.y + this.w * 0.5, this.w * 0.5);
 
     }
-function reload_board(movesdict){
-    pass;
 
 
-}
 
 }
+
+function savegame() {
+//    moves1 = moveslist.toString();
+//    $.post("../savegame/?game_id="+game_id+"",
+//    {
+//        moves: moves1,
+//    },
+//    function(data, status){
+//        console.log("Data: " + moves1 + "\nStatus: " + status);
+
+
+// );
+ }
+
+
+//function reload_board(){
+//    //take string from db and process into moves
+//    var moves = moveslist_test.toString();
+//    for (var n=0; n <= moves.length; n++){
+//        if (moves.charAt(n)>= '0' && moves.charAt(n) <= '9') {
+//            var x = parseInt(moves.charAt(n));
+//            makeMove(x);
+//            playerTurn();
+//
+//        }
+//
+//    }
+//
+//    }

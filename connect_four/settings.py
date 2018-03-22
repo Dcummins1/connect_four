@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'playgame',
-    'channels'
+    #'channels',
+    'channel_test',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,17 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'connect_four.urls'
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('localhost', 6379)],
+        },
+        'ROUTING': 'connect_four.routing.channel_routing',
+    }
+}
 
 TEMPLATES = [
     {
@@ -71,6 +83,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'connect_four.wsgi.application'
+#ASGI_APPLICATION = "connect_four.channel_test.routing.application"
 
 
 # Database

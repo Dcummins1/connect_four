@@ -11,6 +11,7 @@ class Game(models.Model):
     player_2 = models.IntegerField(null=True)
     won = models.IntegerField(null=True)
     created_on = models.DateTimeField(auto_now_add=True)
+    moves =  models.CharField(max_length=255, null=True)
 
     @property
     def user_2(self):

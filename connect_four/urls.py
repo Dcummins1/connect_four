@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('playgame/', include('playgame.urls')),
     path('playgame/', include('django.contrib.auth.urls')),
+    path(r'^', include(('channel_test.urls', 'channel_test'), namespace='channel_test'))
 
 
 

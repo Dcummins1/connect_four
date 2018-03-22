@@ -3,5 +3,42 @@
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
 <p>Game = {{game_id}}, Player 1 = {{specs.user_1.username}}, Player 2 = {{specs.user_2.username}}</p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+
+$(document).ready(function() { alert('game_id');
+    //var game_id = {{game_id}};
+    playerTurn();
+    //take string from db and process into moves
+    var moves = "{{moves}}";
+    for (var n=0; n <= moves.length; n++){
+        if (moves.charAt(n)>= '0' && moves.charAt(n) <= '9') {
+            var x = parseInt(moves.charAt(n));
+            makeMove(x);
+            playerTurn();
+
+        }
+
+    } });
+
+
+window.onload = function (){
+    //var game_id = {{game_id}};
+    playerTurn();
+    //take string from db and process into moves
+    var moves = "{{moves}}";
+    for (var n=0; n <= moves.length; n++){
+        if (moves.charAt(n)>= '0' && moves.charAt(n) <= '9') {
+            var x = parseInt(moves.charAt(n));
+            makeMove(x);
+            playerTurn();
+
+        }
+
+    }
+
+    }
+</script>
+
 {% endif %}
 {% endblock %}
